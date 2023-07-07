@@ -62,8 +62,7 @@ def uploaded_file(filename):
     distances,indices = nbrs.kneighbors(df)
     synthetic_true_labels = label[indices.flatten()]
     y_test = model.predict(df)
-    print("Accuracy:")
-    print(accuracy_score(synthetic_true_labels,y_test))
+    msg = str(accuracy_score(synthetic_true_labels,y_test)*100)
     return render_template("conclusion.html",msg=msg)
  
 
