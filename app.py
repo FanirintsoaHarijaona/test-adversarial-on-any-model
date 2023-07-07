@@ -9,7 +9,7 @@ import joblib
 import os
 import numpy as numpy
 from sklearn.neighbors import NearestNeighbors
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score,recall_score,accuracy_score,classification_report
 from sklearn.preprocessing import LabelEncoder
 
 app = Flask(__name__)
@@ -21,9 +21,9 @@ ALLOWED_EXTENSIONS = {"pkl"}
 #define to the app the root of the uploaded image
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'your user'
-app.config['MYSQL_PASSWORD'] = 'your password'
-app.config['MYSQL_DB'] = 'your database'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'fanirintsoaaomin'
+app.config['MYSQL_DB'] = 'users'
  
 mysql = MySQL(app)
 
@@ -54,7 +54,6 @@ def upload_file():
 def uploaded_file(filename):
 #loading the model and the dataset generated for adversarial
     model = joblib.load(UPLOAD_FOLDER+"/"+filename)
-    msg = ""
     y = pd.read_csv("data/unirdd.csv")
     label = LabelEncoder().fit_transform(y["Label"])
     df = pd.read_csv("data/syntheticAttack_UNR-IDD.csv")  
@@ -62,7 +61,8 @@ def uploaded_file(filename):
     distances,indices = nbrs.kneighbors(df)
     synthetic_true_labels = label[indices.flatten()]
     y_test = model.predict(df)
-    msg = str(accuracy_score(synthetic_true_labels,y_test)*100)
+    msg=pd.DataFrame(classification_report(y_test,synthetic_true_labels,output_dict=True)).transpose()
+    print(msg)
     return render_template("conclusion.html",msg=msg)
  
 

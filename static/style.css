@@ -10,7 +10,7 @@
 .border{
     padding: 80px 50px;
     width: 400px;
-    height: 450px;
+    height: 300px;
     border: 1px solid #236B8E;
     border-radius: 0px;
     background-color: #9AC0CD;
@@ -24,11 +24,13 @@
     font-weight: bold;
     border-radius: 10px;
 }
-
+#upload{
+    margin-bottom: 20px;
+}
 .textbox{
     padding: 10px 40px;
     background-color: #236B8E;
-    text-color: #FFFFFF;
+    color: #FFFFFF;
     border-radius: 10px;
 }
     

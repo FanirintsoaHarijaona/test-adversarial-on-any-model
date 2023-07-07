@@ -3,10 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='conclusion.css') }}">
     <title>Document</title>
 </head>
 <body>
-    <p>The model predict {{msg}} % of the adversarial dataset</p>
+    <h1>The statistics of the adversarial testing</h1>
+    <table>
+        <tr>
+            <th></th>
+            {% for i in msg.keys()%}
+            <th>{{i}}</th>
+            {%endfor%}
+        </tr>
+            {%for i in msg.index%}
+            <tr>
+                <span class="message"><td>{{i}}</td></span>
+                {%for j in msg.keys()%}
+                    <td>{{msg[j][i]}}</td>
+                {%endfor%}
+            </tr>
+            {%endfor%}
+    </table>
+        
 </body>
 </html>
