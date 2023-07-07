@@ -21,9 +21,9 @@ ALLOWED_EXTENSIONS = {"pkl"}
 #define to the app the root of the uploaded image
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'fanirintsoaaomin'
-app.config['MYSQL_DB'] = 'users'
+app.config['MYSQL_USER'] = 'your user'
+app.config['MYSQL_PASSWORD'] = 'your password'
+app.config['MYSQL_DB'] = 'your database'
  
 mysql = MySQL(app)
 
